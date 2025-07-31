@@ -19,6 +19,8 @@ int main() {
     if (!inputFile.is_open()) {
         cerr << "Failed to open file for reading.\n";
     }
+    vector<Pixel> pixels;
+    Pixel p;
     while (getline(inputFile, myString)) {
         stringstream inputLine(myString);
         inputLine >> x_value;
@@ -30,9 +32,21 @@ int main() {
         if (y_value > max_y) {
             max_y = y_value;
         }
-        cout << x_value << " " << char_value << " " << y_value << " " << max_x << " " << max_y << endl;
-        
-        
+        p.x = x_value;
+        p.y = y_value;
+        p.block = char_value;
+        pixels.push_back(p);
+    }
+    
+    vector<vector<string>> grid(max_y+1, vector<string>(max_x +1, " "));
+    for (const Pixel& p : pixels) {
+        grid[p.y][p.x] = p.block;
+    }
+    for (int i=0; i <= max_y; ++i) {
+        for (int j=0; j <= max_x; ++j){
+            cout << grid[i][j] << " ";
+        }
+        cout << endl;
     }
 }
 
