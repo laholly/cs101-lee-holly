@@ -4,8 +4,15 @@
 using namespace std;
 string myString;
 int x_value;
+int max_x = 0;
+int max_y = 0;
 string char_value;
 int y_value;
+struct Pixel {
+    int x;
+    int y;
+    string block;
+};
 
 int main() {
     ifstream inputFile("/Users/leeholly/CS101/cs101-lee-holly/cs101-lee-holly/inputData.txt");
@@ -15,9 +22,15 @@ int main() {
     while (getline(inputFile, myString)) {
         stringstream inputLine(myString);
         inputLine >> x_value;
+        if (x_value > max_x) {
+            max_x = x_value;
+        }
         inputLine >> char_value;
         inputLine >> y_value;
-        cout << x_value << " " << char_value << " " << y_value << endl;
+        if (y_value > max_y) {
+            max_y = y_value;
+        }
+        cout << x_value << " " << char_value << " " << y_value << " " << max_x << " " << max_y << endl;
         
         
     }
